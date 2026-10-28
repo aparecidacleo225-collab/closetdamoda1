@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closet da Moda</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #fdf5f7;
+            color: #333;
+        }
+
+        header {
+            background: #b76e79;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin-bottom: 10px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #a65360;
+            margin-bottom: 20px;
+        }
+
+        .produto {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .produto-item {
+            border: 2px solid #e5c3ca;
+            border-radius: 12px;
+            padding: 12px;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.3s;
+            background: white;
+        }
+
+        .produto-item:hover {
+            border-color: #b76e79;
+            transform: translateY(-3px);
+        }
+
+        .produto-item.selecionado {
+            border-color: #b76e79;
+            background: #fdf0f3;
+        }
+
+        .produto-item img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .produto-item h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .preco {
+            color: #a65360;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .campo {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            background: white;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #b76e79;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #a65360;
+        }
+
+        #resultado {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 12px;
+            background: #fdf0f3;
+            border: 2px solid #b76e79;
+        }
+
+        #agradecimento {
+            font-size: 20px;
+            font-weight: bold;
+            color: #a65360;
+            margin-bottom: 15px;
+        }
+
+        .resumo {
+            line-height: 1.8;
+            overflow-wrap: anywhere;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #b76e79;
+            color: white;
+            margin-top: 30px;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 12px;
+            }
+
+            .card {
+                padding: 16px;
+            }
+
+            .produto {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 10px;
+            }
+
+            .produto-item img {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>CLOSET DA MODA</h1>
+    <p>Seu estilo começa aqui!</p>
+</header>
+
+<div class="container">
+    <div class="card">
+
+        <h2>🛍️ Faça seu pedido</h2>
+
+        <div class="produto">
+
+            <div class="produto-item"
+                onclick="selecionarProduto('Vestido Preto', 89.90, this)">
+                <img src="https://static.dafiti.com.br/p/MISS-BY-JOY-Vestido-Festa-Preto-Cetim-Longo-Liso-Miss-Joy-7471-Feminino-9348-71985931-1-product.jpg"
+                    alt="Vestido Preto">
+                <h3>Vestido Preto</h3>
+                <p class="preco">R$ 89,90</p>
+            </div>
+
+            <div class="produto-item"
+                onclick="selecionarProduto('Camiseta Branca', 49.90, this)">
+                <img src="https://www.revanche.com.br/media/catalog/product/cache/8e5872966dd88cc0e998d2d2c4eec43a/b/l/blusa-baby-look-basica-manga-curta-feminina-revanche-sylfaenol-branca-_2__1.jpg"
+                    alt="Camiseta Branca">
+                <h3>Camiseta Branca</h3>
+                <p class="preco">R$ 49,90</p>
+            </div>
+
+            <div class="produto-item"
+                onclick="selecionarProduto('Calça Jeans', 119.90, this)">
+                <img src="https://s.fashioncloset.com.br/product/2025/04/whatsapp-image-2025-04-11-at-13.49.09.jpeg?format=webp"
+                    alt="Calça Jeans">
+                <h3>Calça Jeans</h3>
+                <p class="preco">R$ 119,90</p>
+            </div>
+
+            <div class="produto-item"
+                onclick="selecionarProduto('Jaqueta', 149.90, this)">
+                <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400"
+                    alt="Jaqueta">
+                <h3>Jaqueta</h3>
+                <p class="preco">R$ 149,90</p>
+            </div>
+
+            <div class="produto-item"
+                onclick="selecionarProduto('Saia', 69.90, this)">
+                <img src="https://d3f0hho2olhh9j.cloudfront.net/claudiarosa/z-76277b5a4617.webp"
+                    alt="Saia">
+                <h3>Saia</h3>
+                <p class="preco">R$ 69,90</p>
+            </div>
+
+        </div>
+
+        <div class="campo">
+            <label for="tamanho">📏 Selecione o tamanho:</label>
+            <select id="tamanho">
+                <option value="">Selecione...</option>
+                <option value="PP">PP</option>
+                <option value="P">P</option>
+                <option value="M">M</option>
+                <option value="G">G</option>
+                <option value="GG">GG</option>
+                <option value="XG">XG</option>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="cor">🎨 Selecione a cor:</label>
+            <select id="cor">
+                <option value="">Selecione...</option>
+                <option value="Preto">Preto</option>
+                <option value="Branco">Branco</option>
+                <option value="Azul">Azul</option>
+                <option value="Vermelho">Vermelho</option>
+                <option value="Verde">Verde</option>
+                <option value="Rosa">Rosa</option>
+                <option value="Cinza">Cinza</option>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="quantidade">🔢 Quantidade:</label>
+            <input type="number" id="quantidade" min="1" value="1">
+        </div>
+
+        <div class="campo">
+            <label for="nome">👤 Nome do cliente:</label>
+            <input type="text" id="nome" placeholder="Digite seu nome">
+        </div>
+
+        <button onclick="finalizarCompra()">
+            FINALIZAR COMPRA
+        </button>
+
+        <div id="resultado">
+            <div id="agradecimento"></div>
+            <div class="resumo" id="resumoPedido"></div>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    <p>Instagram: @closetdamoda</p>
+    <p>WhatsApp: (31) 99999-9999</p>
+    <p>© Closet da Moda</p>
+    <p>Todos os direitos reservados.</p>
+</footer>
+
+<script>
+    let produtoSelecionado = "";
+    let precoProduto = 0;
+
+    function selecionarProduto(nome, preco, elemento) {
+        produtoSelecionado = nome;
+        precoProduto = preco;
+
+        document.querySelectorAll(".produto-item").forEach(function(item) {
+            item.classList.remove("selecionado");
+        });
+
+        elemento.classList.add("selecionado");
+    }
+
+    function finalizarCompra() {
+        const nome = document.getElementById("nome").value.trim();
+        const tamanho = document.getElementById("tamanho").value;
+        const cor = document.getElementById("cor").value;
+        const quantidade = Number(
+            document.getElementById("quantidade").value
+        );
+
+        if (!produtoSelecionado) {
+            alert("Por favor, selecione uma roupa.");
+            return;
+        }
+
+        if (!nome) {
+            alert("Por favor, informe seu nome.");
+            document.getElementById("nome").focus();
+            return;
+        }
+
+        if (!tamanho) {
+            alert("Por favor, selecione o tamanho.");
+            document.getElementById("tamanho").focus();
+            return;
+        }
+
+        if (!cor) {
+            alert("Por favor, selecione a cor.");
+            document.getElementById("cor").focus();
+            return;
+        }
+
+        if (!Number.isInteger(quantidade) || quantidade < 1) {
+            alert("Informe uma quantidade válida.");
+            document.getElementById("quantidade").focus();
+            return;
+        }
+
+        const total = precoProduto * quantidade;
+
+        function dinheiro(valor) {
+            return valor.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            });
+        }
+
+        document.getElementById("agradecimento").textContent =
+            "🎉 Obrigado pela sua compra, " + nome + "!";
+
+        const resumo = document.getElementById("resumoPedido");
+        resumo.replaceChildren();
+
+        const titulo = document.createElement("strong");
+        titulo.textContent = "Resumo do pedido:";
+        resumo.appendChild(titulo);
+        resumo.appendChild(document.createElement("br"));
+
+        const dados = [
+            ["Produto", produtoSelecionado],
+            ["Tamanho", tamanho],
+            ["Cor", cor],
+            ["Quantidade", quantidade],
+            ["Valor unitário", dinheiro(precoProduto)],
+            ["Total", dinheiro(total)]
+        ];
+
+        dados.forEach(function(dado) {
+            const linha = document.createElement("p");
+            const rotulo = document.createElement("strong");
+
+            rotulo.textContent = dado[0] + ": ";
+            linha.appendChild(rotulo);
+            linha.appendChild(document.createTextNode(dado[1]));
+
+            resumo.appendChild(linha);
+        });
+
+        const mensagem = document.createElement("p");
+        mensagem.textContent =
+            "Seu pedido foi registrado com sucesso! ❤️";
+        mensagem.style.marginTop = "12px";
+
+        resumo.appendChild(mensagem);
+
+        document.getElementById("resultado").style.display = "block";
+
+        document.getElementById("resultado").scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+</script>
+
+</body>
+</html>
